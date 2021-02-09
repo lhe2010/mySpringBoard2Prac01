@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- mapper임을 명시하기 위한 DTD 선언 -->
+		
+<mapper namespace="com.spring.mapper.BoardMapper">
+	<select id="getAllSimpleBoard" resultType="com.springboard.adv.dto.BoardDTO">
+		SELECT * FROM BOARD
+	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO BOARD 
+		VALUES(
+			(SELECT IFNULL(MAX(NUM)+1,1)
+		     FROM BOARD AS B1), #{writer}, #{email}, #{subject}, #{password}, NOW(),
+			(SELECT IFNULL(MAX(REF)+1,1)
+		     FROM BOARD AS B2), 1, 1, 0, #{content})
+	</insert>
+</mapper>

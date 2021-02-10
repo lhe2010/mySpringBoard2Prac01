@@ -31,4 +31,14 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getOneBoard(num);
 	}
 
+	@Override
+	public boolean updateBoard(BoardDTO bdto) throws Exception {
+		boolean isSucceed = false;
+		if(dao.validateUserCheck(bdto) != null) { // null이 아니면 select된 것이 있다 = 비밀번호가 맞음
+			dao.updateBoard(bdto);
+			isSucceed = true;
+		}
+		return isSucceed;
+	}
+
 }

@@ -3,27 +3,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>bWrite</title>
+<title>bUpdate</title>
 </head>
 <body>
-
 	<div align="center">
-	
-		<h1>Board Write</h1>
+		<h1> Board Update </h1>
+	</div>
+	<div align="center">
 		
-		<form action="boardWrite" method="post">
+		<form action="boardUpdate" method="post">
 			<table border="1">
 				<tr>
-					<td align="center"><span style="color:red">*</span>Writer</td>
-					<td><input type="text" id="writer" name="writer"></td>
+					<td align="center">Writer</td>
+					<td>${bdto.writer }</td>
 				</tr>
 				<tr>
-					<td align="center"><span style="color:red">*</span>subject</td>
-					<td><input type="text" id="subject" name="subject"></td>
+					<td>RegDate</td>
+					<td>${bdto.regDate }</td>
 				</tr>
 				<tr>
-					<td align="center"><span style="color:red">*</span>email</td>
-					<td><input type="email" id="email" name="email"></td>
+					<td align="center">Subject</td>
+					<td><input type="text" id="subject" name="subject" value="${bdto.subject }"></td>
 				</tr>
 				<tr>
 					<td align="center"><span style="color:red">*</span>password</td>
@@ -31,11 +31,12 @@
 				</tr>
 				<tr>
 					<td align="center">Content</td>
-					<td><textarea rows="10" cols="50" id="content" name="content"></textarea></td>
+					<td><textarea rows="10" cols="50" id="content" name="content">${bdto.content }</textarea></td>
 				</tr>
 				<tr align="center">
 					<td colspan="2">
-						<input type="submit" value="Write">
+						<input type="hidden" name="num" value="${bdto.num }">
+						<input type="submit" value="Modify">
 						<input type="reset" value="Reset">
 						<input type="button" value="Main" onclick="location.href='boardSimpleList'">
 					</td>
@@ -43,6 +44,5 @@
 			</table>
 		</form>
 	</div>
-
 </body>
 </html>

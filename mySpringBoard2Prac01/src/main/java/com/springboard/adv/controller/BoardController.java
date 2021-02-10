@@ -43,5 +43,19 @@ public class BoardController {
 		model.addAttribute("bdto", service.getOneBoard(num));
 		return "boardEx02/bInfo";
 	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
+	public String boardUpdate(@RequestParam ("num") int num, Model model) throws Exception {
+		model.addAttribute("bdto", service.getOneBoard(num));
+		return "boardEx02/bUpdate";
+	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
+	public String boardUpdate(BoardDTO bdto, Model model) throws Exception {
+		if(service.updateBoard(bdto))	model.addAttribute("success",true);
+		else							model.addAttribute("success",false);
+		
+		return "boardEx02/bUpdatePro";
+	}
 
 }

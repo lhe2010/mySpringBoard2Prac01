@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,7 @@
 		<h1> Board Info </h1>
 	</div>
 	<div align="center">
-		<table board="1">
+		<table border="1">
 			<tr>
 				<td>Board Number</td>
 				<td>${bdto.num }</td>
@@ -42,7 +41,7 @@
 				<td>${bdto.content }</td>
 			</tr>
 			<tr>
-				<td colspan="2"><!-- reply/update/delete/main -->
+				<td colspan="2" align="center"><!-- reply/update/delete/main -->
 					<button onclick="location.href='boardReplyWrite?num=${bdto.num}'">Reply</button>
 					<button onclick="location.href='boardUpdate?num=${bdto.num}'">Update</button>
 					<button onclick="location.href='boardDelete?num=${bdto.num}'">Delete</button>

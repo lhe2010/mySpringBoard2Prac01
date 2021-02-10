@@ -32,4 +32,8 @@
 	<update id="updateBoard">
 		UPDATE BOARD SET SUBJECT=#{subject}, CONTENT=#{content} WHERE NUM=#{num}
 	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD WHERE NUM=#{num}
+	</delete>
 </mapper>

@@ -41,4 +41,14 @@ public class BoardServiceImpl implements BoardService {
 		return isSucceed;
 	}
 
+	@Override
+	public boolean deleteBoard(BoardDTO bdto) throws Exception {
+		boolean isSucceed = false;
+		if(dao.validateUserCheck(bdto) != null) { // null이 아니면 select된 것이 있다 = 비밀번호가 맞음
+			dao.deleteBoard(bdto);
+			isSucceed = true;
+		}
+		return isSucceed;
+	}
+
 }

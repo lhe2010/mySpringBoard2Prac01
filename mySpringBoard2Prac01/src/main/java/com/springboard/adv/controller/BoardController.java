@@ -57,5 +57,18 @@ public class BoardController {
 		
 		return "boardEx02/bUpdatePro";
 	}
+	@RequestMapping(value="/boardDelete", method=RequestMethod.GET)
+	public String boardDelete(@RequestParam ("num") int num, Model model) throws Exception {
+		model.addAttribute("bdto", service.getOneBoard(num));
+		return "boardEx02/bDelete";
+	}
+	
+	@RequestMapping(value="/boardDelete", method=RequestMethod.POST)
+	public String boardDelete(BoardDTO bdto, Model model) throws Exception {
+		if(service.deleteBoard(bdto))	model.addAttribute("success",true);
+		else							model.addAttribute("success",false);
+		
+		return "boardEx02/bDeletePro";
+	}
 
 }

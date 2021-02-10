@@ -25,4 +25,10 @@ public class BoardServiceImpl implements BoardService {
 		dao.insertBoard(bdto);
 	}
 
+	@Override
+	public BoardDTO getOneBoard(int num) throws Exception {
+		dao.increaseReadCount(num);
+		return dao.getOneBoard(num);
+	}
+
 }

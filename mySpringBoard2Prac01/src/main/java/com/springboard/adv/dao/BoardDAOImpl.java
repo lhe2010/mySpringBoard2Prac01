@@ -22,7 +22,17 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void insertBoard(BoardDTO bdto) throws Exception {
-		session.insert("com.spring.mapper.BoardMapper.insertBoard");
+		session.insert("com.spring.mapper.BoardMapper.insertBoard", bdto);
+	}
+
+	@Override
+	public BoardDTO getOneBoard(int num) throws Exception {
+		return session.selectOne("com.spring.mapper.BoardMapper.getOneBoard", num);
+	}
+
+	@Override
+	public void increaseReadCount(int num) throws Exception {
+		session.update("com.spring.mapper.BoardMapper.increaseReadCount", num);
 	}
 
 }

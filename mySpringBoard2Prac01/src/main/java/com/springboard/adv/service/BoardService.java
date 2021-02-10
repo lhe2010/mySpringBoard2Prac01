@@ -9,5 +9,7 @@ public interface BoardService {
 	public List<BoardDTO> listAllSimple() throws Exception;
 	
 	public void insertBoard(BoardDTO bdto) throws Exception;
+	
+	public BoardDTO getOneBoard(int num) throws Exception;
 
 }

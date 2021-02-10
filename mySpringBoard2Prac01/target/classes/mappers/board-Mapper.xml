@@ -12,8 +12,16 @@
 		INSERT INTO BOARD 
 		VALUES(
 			(SELECT IFNULL(MAX(NUM)+1,1)
-		     FROM BOARD AS B1), #{writer}, #{email}, #{subject}, #{password}, NOW(),
+		     FROM BOARD AS B), #{writer}, #{email}, #{subject}, #{password}, NOW(),
 			(SELECT IFNULL(MAX(REF)+1,1)
-		     FROM BOARD AS B2), 1, 1, 0, #{content})
+		     FROM BOARD AS B), 1, 1, 0, #{content})
 	</insert>
+	
+	<select id="getOneBoard" resultType="com.springboard.adv.dto.BoardDTO">
+		SELECT * FROM BOARD WHERE NUM=#{num}
+	</select>
+	
+	<update id="increaseReadCount">
+		UPDATE BOARD SET READ_COUNT = READ_COUNT + 1 WHERE NUM=#{num}
+	</update>
 </mapper>

@@ -15,5 +15,7 @@ public interface BoardService {
 	public boolean updateBoard(BoardDTO bdto) throws Exception;
 	
 	public boolean deleteBoard(BoardDTO bdto) throws Exception;
+	
+	public void insertReplyBoard(BoardDTO bdto) throws Exception;
 
 }

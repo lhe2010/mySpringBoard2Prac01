@@ -51,4 +51,9 @@ public class BoardServiceImpl implements BoardService {
 		return isSucceed;
 	}
 
+	@Override
+	public void insertReplyBoard(BoardDTO bdto) throws Exception {
+		
+	}
+
 }

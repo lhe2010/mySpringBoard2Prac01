@@ -70,5 +70,21 @@ public class BoardController {
 		
 		return "boardEx02/bDeletePro";
 	}
+	
+	@RequestMapping(value="/boardReplyWrite", method=RequestMethod.GET)
+	public String boardReplyWrite(@RequestParam ("num") int num, Model model) throws Exception {
+		model.addAttribute("bdto", service.getOneBoard(num));
+		return "boardEx02/bReply";
+	}
+	
+	@RequestMapping(value="/boardReplyWrite", method=RequestMethod.POST)
+	public String boardReplyWrite(Model model, BoardDTO bdto) throws Exception {
+		
+		return "redirect:boardSimpleList";
+	}
+	
+	
+	
+	
 
 }

@@ -36,4 +36,12 @@
 	<delete id="deleteBoard">
 		DELETE FROM BOARD WHERE NUM=#{num}
 	</delete>
+	
+	<update id="updateBoardReplyStep">
+		UPDATE BOARD 
+		SET RE_STEP=#{reStep}, RE_LEVEL=#{reLevel}
+		WHERE NUM=#{num}
+	</update>
+	
+	<
 </mapper>

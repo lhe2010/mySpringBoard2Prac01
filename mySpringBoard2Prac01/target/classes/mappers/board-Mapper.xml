@@ -38,10 +38,48 @@
 	</delete>
 	
 	<update id="updateBoardReplyStep">
-		UPDATE BOARD 
-		SET RE_STEP=#{reStep}, RE_LEVEL=#{reLevel}
-		WHERE NUM=#{num}
+		<![CDATA[
+			UPDATE 	BOARD 
+			SET 	RE_STEP = RE_STEP + 1
+			WHERE 	REF = #{ref} AND RE_STEP > #{reStep}
+		]]>
 	</update>
 	
-	<
+	<insert id="insertReplyBoard">
+		INSERT INTO BOARD
+		VALUES(
+			(SELECT MAX(NUM)+1
+			 FROM BOARD AS NUM), #{writer}, #{email},
+			 #{subject}, #{password}, now(),
+			 #{ref}, #{reStep}+1, #{reLevel}+1, 0, 
+			 #{content})		
+	</insert>
+	
+	<!-- 게시글의 개수를 반환하는 쿼리 1. 특정 키워드가 없을 경우 -->
+	<select id="getAllBoardCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD
+	</select>
+	
+	<!-- 게시글의 내용을 반환하는 쿼리 1. 전체 검색일 경우 -->
+	<select id="getSearchBoard" resultType="com.springboard.adv.dto.BoardDTO">
+		SELECT * FROM BOARD
+		ORDER BY REF DESC, RE_STEP ASC
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

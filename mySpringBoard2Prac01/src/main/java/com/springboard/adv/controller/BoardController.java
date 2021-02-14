@@ -1,5 +1,7 @@
 package com.springboard.adv.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,19 @@ public class BoardController {
 	
 	@RequestMapping(value="/")
 	public String main(Model model) throws Exception {
-		return "redirect:boardSimpleList";	// 연습중이므로
+//		return "redirect:boardSimpleList";	// 연습중이므로
+		return "redirect:boardList";
 	}
 	
 	@RequestMapping(value="/boardSimpleList")
 	public String simpleBoardList(Model model) throws Exception {
 		model.addAttribute("simpleList", service.listAllSimple());
+		// 프린트 System.out.println("getAllBoardCount=" + service.getAllBoardCount());
+		// 프린트
+//		List<BoardDTO> list = service.getSearchBoard();
+//		for (BoardDTO item : list) {
+//			System.out.println(item);
+//		}
 		return "boardEx02/bSimpleList";
 	}
 	
@@ -35,7 +44,8 @@ public class BoardController {
 	@RequestMapping(value="/boardWrite", method = RequestMethod.POST)
 	public String boardWrite(Model model, BoardDTO bdto) throws Exception {
 		service.insertBoard(bdto);
-		return "redirect:boardSimpleList";
+//		return "redirect:boardSimpleList";
+		return "redirect:boardList";
 	}
 	
 	@RequestMapping(value="/boardInfo", method = RequestMethod.GET)
@@ -79,12 +89,18 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardReplyWrite", method=RequestMethod.POST)
 	public String boardReplyWrite(Model model, BoardDTO bdto) throws Exception {
+		service.insertReplyBoard(bdto);
 		
-		return "redirect:boardSimpleList";
+//		return "redirect:boardSimpleList";
+		return "redirect:boardList";
 	}
-	
-	
-	
-	
-
+	@RequestMapping(value="/boardList")
+	public String boardList(Model model) throws Exception {
+		// 전체 게시글 개수
+		int totalBoardCount = service.getAllBoardCount();
+		List<BoardDTO> boardList = service.getSearchBoard();
+		model.addAttribute("boardList", boardList);
+		
+		return "boardEx02/bList";
+	}
 }

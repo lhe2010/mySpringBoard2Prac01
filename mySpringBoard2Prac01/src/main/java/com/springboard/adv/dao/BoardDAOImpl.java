@@ -52,12 +52,23 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void insertReplyBoard(BoardDTO bdto) throws Exception {
-		
+		session.insert("com.spring.mapper.BoardMapper.insertReplyBoard", bdto);
 	}
 
 	@Override
 	public void updateBoardReplyStep(BoardDTO bdto) throws Exception {
-		
+		session.insert("com.spring.mapper.BoardMapper.updateBoardReplyStep", bdto);
+	}
+
+	@Override
+	public List<BoardDTO> getSearchBoard() throws Exception {
+		return session.selectList("com.spring.mapper.BoardMapper.getSearchBoard");
+	}
+
+	@Override
+	public int getAllBoardCount() throws Exception {
+		// 게시글의 개수를 반환하는 쿼리 1. 특정 키워드가 없을 경우
+		return session.selectOne("com.spring.mapper.BoardMapper.getAllBoardCount");
 	}
 
 }

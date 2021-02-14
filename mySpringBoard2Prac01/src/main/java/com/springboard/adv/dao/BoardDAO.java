@@ -20,4 +20,7 @@ public interface BoardDAO {
 	public void insertReplyBoard(BoardDTO bdto) throws Exception;
 	public void updateBoardReplyStep(BoardDTO bdto) throws Exception;
 	
+	public int getAllBoardCount() throws Exception;
+	public List<BoardDTO> getSearchBoard() throws Exception;
+	
 }

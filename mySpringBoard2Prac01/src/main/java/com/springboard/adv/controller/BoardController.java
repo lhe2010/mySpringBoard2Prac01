@@ -1,6 +1,8 @@
 package com.springboard.adv.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,7 @@ import com.springboard.adv.dto.BoardDTO;
 import com.springboard.adv.service.BoardService;
 
 @Controller
-public class BoardController {
+public class BoardController {    
 	
 	@Autowired
 	private BoardService service;
@@ -95,11 +97,62 @@ public class BoardController {
 		return "redirect:boardList";
 	}
 	@RequestMapping(value="/boardList")
-	public String boardList(Model model) throws Exception {
-		// 전체 게시글 개수
-		int totalBoardCount = service.getAllBoardCount();
-		List<BoardDTO> boardList = service.getSearchBoard();
+	public String boardList(@RequestParam (name="onePageViewCount", defaultValue = "1") int onePageViewCount,
+							@RequestParam (name="currentPageNumber", defaultValue = "1") int currentPageNumber,
+							@RequestParam (name="searchKeyword", defaultValue = "total") String searchKeyword,
+							@RequestParam (name="searchWord", defaultValue = "") String searchWord,
+							Model model) throws Exception {
+		
+		// [(검색/페이징처리 전)전체 게시글 개수]
+//		int totalBoardCount = service.getAllBoardCount(); 		// 페이징처리 전
+//		List<BoardDTO> boardList = service.getSearchBoard();	// 검색 처리 전
+//		model.addAttribute("boardList", boardList);
+
+		// 페이지 시작 게시글 인덱스
+//		int startBoardIdx = 1;
+		
+		// [검색 기능 시작]
+		// 검색 관련 정보 map 인 searchInfo 생성
+		Map<String, Object> searchInfo = new HashMap<String, Object>();
+		searchInfo.put("onePageViewCount", onePageViewCount);
+//		searchInfo.put("startBoardIdx", startBoardIdx);
+		searchInfo.put("searchKeyword", searchKeyword);
+		searchInfo.put("searchWord", searchWord);
+		List<BoardDTO> boardList = service.getSearchBoard();	
+		
+		// 게시글 전체 개수를 반환하는 관련정보 map 생성
+		Map<String, String> searchCountInfo = new HashMap<String, String>();
+		searchInfo.put("searchKeyword", searchKeyword);
+		searchInfo.put("searchWord", searchWord);
+		
+		// [페이징 처리 순서]
+		// 전체 페이지개수 = 전체게시글 수 / 한페이지에서 보여주는 글 수 
+		int totalBoardCount = service.getAllBoardCount(searchCountInfo);
+		
+		// 나머지가 0이면 추가x, 나머지가 0이 아니면 +1페이지 처리 
+		// 시작페이지
+		// 끝페이지
+		// 끝페이지가 전체 페이지 개수보다 크다면 
+		// 게시물이 한페이지에 보여지는 것보다 작다면
+		
+		
+		// [model.addAttribute()] - 검색처리 관련
+		model.addAttribute("totalBoardCount", totalBoardCount);
+		model.addAttribute("onePageViewCount", onePageViewCount);
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("searchWord", searchWord);
+		
 		model.addAttribute("boardList", boardList);
+		
+		// [model.addAttribute()] - 페이징처리 관련
+		
+		// [테스트를 위한 printout]
+		System.out.println("========================");
+		System.out.println("totalBoardCount : " + totalBoardCount);
+		System.out.println("onePageViewCount : " + onePageViewCount);
+		System.out.println("searchKeyword : " + searchKeyword);
+		System.out.println("searchWord : " + searchWord);
+		System.out.println("========================");
 		
 		return "boardEx02/bList";
 	}

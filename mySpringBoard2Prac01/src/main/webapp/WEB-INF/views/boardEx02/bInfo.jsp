@@ -45,7 +45,7 @@
 					<button onclick="location.href='boardReplyWrite?num=${bdto.num}'">Reply</button>
 					<button onclick="location.href='boardUpdate?num=${bdto.num}'">Update</button>
 					<button onclick="location.href='boardDelete?num=${bdto.num}'">Delete</button>
-					<button onclick="location.href='boardSimpleList'">Main</button>
+					<button onclick="location.href='boardList'">Main</button>
 				</td>
 			</tr>
 		</table>

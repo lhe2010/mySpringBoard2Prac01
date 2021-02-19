@@ -43,7 +43,7 @@
 						<input type="hidden" name="reLevel" value="${bdto.reLevel }">
 						<input type="submit" value="Reply">
 						<input type="reset" value="Reset">
-						<input type="button" value="Main" onclick="location.href='boardSimpleList'">
+						<input type="button" value="Main" onclick="location.href='boardList'">
 					</td>
 				</tr>
 			</table>

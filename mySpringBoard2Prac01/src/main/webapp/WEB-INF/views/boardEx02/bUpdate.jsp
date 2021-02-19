@@ -38,7 +38,7 @@
 						<input type="hidden" name="num" value="${bdto.num }">
 						<input type="submit" value="Modify">
 						<input type="reset" value="Reset">
-						<input type="button" value="Main" onclick="location.href='boardSimpleList'">
+						<input type="button" value="Main" onclick="location.href='boardList'">
 					</td>
 				</tr>
 			</table>

@@ -15,7 +15,7 @@ import com.springboard.adv.dto.BoardDTO;
 import com.springboard.adv.service.BoardService;
 
 @Controller
-public class BoardController {    
+public class BoardController {
 	
 	@Autowired
 	private BoardService service;
@@ -97,7 +97,7 @@ public class BoardController {
 		return "redirect:boardList";
 	}
 	@RequestMapping(value="/boardList")
-	public String boardList(@RequestParam (name="onePageViewCount", defaultValue = "1") int onePageViewCount,
+	public String boardList(@RequestParam (name="onePageViewCount", defaultValue = "10") int onePageViewCount,
 							@RequestParam (name="currentPageNumber", defaultValue = "1") int currentPageNumber,
 							@RequestParam (name="searchKeyword", defaultValue = "total") String searchKeyword,
 							@RequestParam (name="searchWord", defaultValue = "") String searchWord,
@@ -110,15 +110,16 @@ public class BoardController {
 
 		// 페이지 시작 게시글 인덱스
 //		int startBoardIdx = 1;
+		int startBoardIdx = (currentPageNumber-1)*onePageViewCount;
 		
 		// [검색 기능 시작]
 		// 검색 관련 정보 map 인 searchInfo 생성
 		Map<String, Object> searchInfo = new HashMap<String, Object>();
-		searchInfo.put("onePageViewCount", onePageViewCount);
-//		searchInfo.put("startBoardIdx", startBoardIdx);
+		searchInfo.put("onePageViewCount", onePageViewCount); 
+		searchInfo.put("startBoardIdx", startBoardIdx);
 		searchInfo.put("searchKeyword", searchKeyword);
 		searchInfo.put("searchWord", searchWord);
-		List<BoardDTO> boardList = service.getSearchBoard();	
+		List<BoardDTO> boardList = service.getSearchBoard(searchInfo);	
 		
 		// 게시글 전체 개수를 반환하는 관련정보 map 생성
 		Map<String, String> searchCountInfo = new HashMap<String, String>();
@@ -127,7 +128,8 @@ public class BoardController {
 		
 		// [페이징 처리 순서]
 		// 전체 페이지개수 = 전체게시글 수 / 한페이지에서 보여주는 글 수 
-		int totalBoardCount = service.getAllBoardCount(searchCountInfo);
+		int totalBoardCount = 100;
+//		int totalBoardCount = service.getAllBoardCount(searchCountInfo);
 		
 		// 나머지가 0이면 추가x, 나머지가 0이 아니면 +1페이지 처리 
 		// 시작페이지
@@ -139,6 +141,7 @@ public class BoardController {
 		// [model.addAttribute()] - 검색처리 관련
 		model.addAttribute("totalBoardCount", totalBoardCount);
 		model.addAttribute("onePageViewCount", onePageViewCount);
+		model.addAttribute("onePageViewCount", 10);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("searchWord", searchWord);
 		

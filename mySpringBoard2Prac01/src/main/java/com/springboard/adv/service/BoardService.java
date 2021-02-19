@@ -1,6 +1,7 @@
 package com.springboard.adv.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.springboard.adv.dto.BoardDTO;
 
@@ -18,7 +19,7 @@ public interface BoardService {
 	
 	public void insertReplyBoard(BoardDTO bdto) throws Exception;
 	
-	public int getAllBoardCount() throws Exception;
-	public List<BoardDTO> getSearchBoard() throws Exception;
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception;
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception;
 
 }

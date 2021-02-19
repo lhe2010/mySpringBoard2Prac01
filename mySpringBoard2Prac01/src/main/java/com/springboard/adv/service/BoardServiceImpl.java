@@ -1,6 +1,7 @@
 package com.springboard.adv.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -59,15 +60,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getAllBoardCount() throws Exception {
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
 		// 게시글의 개수를 반환하는 쿼리 1. 특정 키워드가 없을 경우
-		return dao.getAllBoardCount();
+		return dao.getAllBoardCount(searchCountInfo);
 	}
 
 	@Override
-	public List<BoardDTO> getSearchBoard() throws Exception {
-		// 게시글의 내용을 반환하는 쿼리 1. 전체 검색일 경우
-		return dao.getSearchBoard();
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception {
+		// 게시글의 내용을 반환하는 쿼리 
+		return dao.getSearchBoard(searchInfo);
 	}
 	
 	

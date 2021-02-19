@@ -12,10 +12,10 @@
 		<h1>
 			MVC2_Model_Advance
 		</h1>
+		<div>
+			<button onclick="location.href='boardWrite'">write</button>
+		</div>
 		<table border="1">
-			<div>
-				<button onclick="location.href='boardWrite'">write</button>
-			</div>
 			<thead>
 				<tr>
 					<th>order</th>

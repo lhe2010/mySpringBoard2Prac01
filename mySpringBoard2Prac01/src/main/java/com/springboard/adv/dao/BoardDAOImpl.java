@@ -1,6 +1,7 @@
 package com.springboard.adv.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -61,14 +62,14 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> getSearchBoard() throws Exception {
-		return session.selectList("com.spring.mapper.BoardMapper.getSearchBoard");
+	public List<BoardDTO> getSearchBoard(Map<String, Object> searchInfo) throws Exception {
+		return session.selectList("com.spring.mapper.BoardMapper.getSearchBoard", searchInfo);
 	}
 
 	@Override
-	public int getAllBoardCount() throws Exception {
+	public int getAllBoardCount(Map<String, String> searchCountInfo) throws Exception {
 		// 게시글의 개수를 반환하는 쿼리 1. 특정 키워드가 없을 경우
-		return session.selectOne("com.spring.mapper.BoardMapper.getAllBoardCount");
+		return session.selectOne("com.spring.mapper.BoardMapper.getAllBoardCount", searchCountInfo);
 	}
 
 }
